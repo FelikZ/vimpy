@@ -29,8 +29,9 @@ bundle_dir = os.path.dirname(vimpy_dir)
 
 pathogen_check = vim.eval('exists("g:loaded_pathogen")')
 vundle_check = vim.eval('exists(":Bundle")')
+neobundle_check = vim.eval('exists(":NeoBundle")')
 
-if not pathogen_check and not vundle_check:
+if not pathogen_check and not vundle_check and not neobundle_check:
     message = open(os.path.join(docs_dir, 'pathogen_required.md'), 'r')
 
     vim.command("echo '{0}'".format(message.read()))
@@ -74,12 +75,6 @@ else:
 
               except ImportError:
                   pass
-
-          for submodule in ['commands', 'plugin']:
-            try:
-              importlib.import_module('{0}.{1}'.format(module, submodule))
-            except ImportError:
-              pass
 
 EndPython
 
